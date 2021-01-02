@@ -1,6 +1,24 @@
-;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/init.el -*- lexical-binding: t; -*-
 
-(doom! :completion
+;; This file controls what Doom modules are enabled and what order they load
+;; in. Remember to run 'doom sync' after modifying it!
+
+;; NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
+;;      documentation. There you'll find a "Module Index" link where you'll find
+;;      a comprehensive list of Doom's modules and what flags they support.
+
+;; NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
+;;      'C-c c k' for non-vim users) to view its documentation. This works on
+;;      flags as well (those symbols that start with a plus).
+;;
+;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
+;;      directory (for easy access to its source code).
+
+(doom! :input
+       ;;chinese
+       japanese
+
+       :completion
        (company +childframe)
        ivy
        ;;helm
@@ -11,6 +29,7 @@
        doom
        doom-dashboard
        ;;doom-quit
+       (emoji +unicode)
        ;;fill-column
        hl-todo
        ;;hydra
@@ -23,7 +42,7 @@
        (popup +defaults)
        ;;treemacs
        tree-sitter
-       ;;unicode
+       unicode
        ;;tabs
        vc-gutter
        ;;window-select
@@ -31,9 +50,6 @@
        ;;zen
        ;;vi-tilde-fringe
 
-       :input
-       ;;chinese
-       ;;japanese
 
        :editor
        (evil +everywhere)
@@ -43,7 +59,7 @@
        format            ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
-       ;;parinfer          ; turn lisp into python, sort of
+       parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
        snippets
        ;;word-wrap
@@ -71,13 +87,12 @@
        ;;(debugger +lsp)
        direnv
        ;;docker
-       editorconfig      ; let someone else argue about tabs vs spaces
+       ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)
        ;;gist
        (lookup +docsets +dictionary)
        lsp
-       ;;macos             ; MacOS-specific commands
        magit             ;
        ;;make              ; run make tasks from Emacs
        ;;pass                ; password manager for nerds
@@ -97,11 +112,11 @@
        :lang
        ;;agda
        ;;assembly
-       (cc +lsp)
+       ;;cc
        ;;crystal
-       ;;clojure
-       ;;(csharp +unity +lsp)
-       common-lisp
+       clojure
+       ;;csharp
+       ;;common-lisp
        ;;coq
        ;;data
        ;;erlang
@@ -115,32 +130,32 @@
        ;;haskell
        ;;hy
        ;;(java +lsp)
-       (javascript +lsp)
+       ;;(javascript +lsp)
        ;;julia
        ;;latex
        ;;ledger
-       (lua +fennel)
+       ;;(lua +fennel)
        markdown
        ;;nim
-       nix
+       ;;nix
        ;;ocaml
        (org +dragndrop +journal +roam +present)
        ;;perl
        ;;php
        ;;plantuml
        ;;purescript
-       (python +lsp)
+       ;;python
        ;;qt
        ;;racket
        ;;rest
        ;;ruby
-       (rust +lsp)
+       ;;rust
        ;;scala
        ;;scheme
        sh
        ;;sml
        ;;swift
-       web
+       ;;web
        ;;yaml
 
        :email
@@ -155,4 +170,4 @@
 
        :config
        ;;literate
-       (default +bindings +smartparens))
+     (default +bindings +smartparens))

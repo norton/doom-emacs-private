@@ -1,10 +1,10 @@
-;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(setq user-full-name "Henrik Lissner"
-      user-mail-address "henrik@lissner.net"
+(setq user-full-name "Joseph Norton"
+      user-mail-address "norton@alum.mit.edu"
 
       doom-scratch-initial-major-mode 'lisp-interaction-mode
-      doom-theme 'doom-dracula
+      doom-theme 'doom-solarized-dark
       treemacs-width 32
 
       ;; Line numbers are pretty slow all around. The performance boost of
@@ -25,23 +25,65 @@
       ;; More common use-case
       evil-ex-substitute-global t)
 
-(add-load-path! "~/projects/conf/doom-snippets")
-
 (use-package! atomic-chrome
-  :after-call focus-out-hook
+  :after-call after-focus-change-function
   :config
   (setq atomic-chrome-default-major-mode 'markdown-mode
         atomic-chrome-buffer-open-style 'frame)
   (atomic-chrome-start-server))
 
+(use-package! whitespace
+  :init
+  (defvar whitespace-cleanup-before-save t)
+  (defun my-whitespace-cleanup-before-save ()
+    (if whitespace-cleanup-before-save
+      (whitespace-cleanup)))
+  (dolist (hook '(prog-mode-hook text-mode-hook))
+    (add-hook hook #'whitespace-mode))
+  (add-hook 'before-save-hook 'my-whitespace-cleanup-before-save)
+  ;; Except Markdown
+  (add-hook 'markdown-mode-hook
+    '(lambda ()
+       (set (make-local-variable 'whitespace-cleanup-before-save) nil)))
+  :config
+  (setq whitespace-line-column 80
+        ;;whitespace-style '(face tabs empty trailing lines-tail)
+        whitespace-style '(face tabs spaces trailing lines-tail newline)))
+
+(defun whack-whitespace-forward ()
+  "Delete all white space from point to the next word."
+  (interactive nil)
+  (re-search-forward "[ \t\n]+" nil t)
+  (replace-match "" nil nil))
+
+(defun un-indent-by-removing-4-spaces ()
+  "Remove 4 spaces from beginning of a line."
+  (interactive)
+  (save-excursion
+    (save-match-data
+      (beginning-of-line)
+      ;; get rid of tabs at beginning of line
+      (when (looking-at "^\\s-+")
+        (untabify (match-beginning 0) (match-end 0)))
+      (when (looking-at "^    ")
+        (replace-match "")))))
+
+(defun toggle-comment-on-line ()
+  "Comment or uncomment current line."
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+
+(global-set-key (kbd "M-[") 'whack-whitespace-forward)
+(global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
+(global-set-key (kbd "C-;") 'toggle-comment-on-line)
 
 ;;
 ;;; UI
 
 ;; "monospace" means use the system default. However, the default is usually two
 ;; points larger than I'd like, so I specify size 12 here.
-(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-font (font-spec :family "Source Code Pro for Powerline" :size 13)
+      doom-variable-pitch-font (font-spec :family "open sans" :size 14))
 
 ;; Prevents some cases of Emacs flickering
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
@@ -101,7 +143,7 @@
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
 ;; Don't need the menu; I know them all by heart
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+;;(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 
 
 ;;

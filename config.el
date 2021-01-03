@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(setq user-full-name "Joseph Norton"
-      user-mail-address "norton@alum.mit.edu"
+(setq user-full-name (getenv "GIT_AUTHOR_NAME")
+      user-mail-address (getenv "GIT_AUTHOR_EMAIL")
 
       doom-scratch-initial-major-mode 'lisp-interaction-mode
       doom-theme 'doom-solarized-dark

@@ -126,9 +126,9 @@
       magit-save-repository-buffers nil
       ;; Don't restore the wconf after quitting magit, it's jarring
       magit-inhibit-save-previous-winconf t
-      transient-values '((magit-commit "--gpg-sign=5F6C0EA160557395")
-                         (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
-                         (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
+      transient-values '((magit-commit "")
+                         (magit-rebase "--autosquash" "")
+                         (magit-pull "--rebase" "")))
 
 ;;; :lang org
 (setq org-directory "~/projects/org/"

@@ -40,6 +40,7 @@
        ;;neotree
        ophints
        (popup +defaults)
+       (pretty-code +fira)
        ;;treemacs
        tree-sitter
        unicode

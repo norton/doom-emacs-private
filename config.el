@@ -80,10 +80,14 @@
 ;;
 ;;; UI
 
-;; "monospace" means use the system default. However, the default is usually two
-;; points larger than I'd like, so I specify size 12 here.
-(setq doom-font (font-spec :family "Source Code Pro for Powerline" :size 13)
+(setq doom-font (font-spec :family "Source Code Pro" :size 13)
+      doom-big-font (font-spec :family "Source Code Pro" :size 40)
       doom-variable-pitch-font (font-spec :family "open sans" :size 14))
+
+(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
+(add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+(add-hook 'clojurec-mode-hook 'prettify-symbols-mode)
+(add-hook 'clojurescript-mode-hook 'prettify-symbols-mode)
 
 ;; Prevents some cases of Emacs flickering
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))

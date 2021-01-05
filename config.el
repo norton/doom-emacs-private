@@ -1,5 +1,8 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(setq default-directory "~/")
+(setq command-line-default-directory "~/")
+
 (setq user-full-name (getenv "GIT_AUTHOR_NAME")
       user-mail-address (getenv "GIT_AUTHOR_EMAIL")
 
